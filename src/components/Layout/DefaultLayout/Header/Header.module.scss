@@ -1,0 +1,93 @@
+.wrapper {
+    --search-border-radius: 92px;
+    --search-height: 46px;
+    --search-height-after: 28px;
+    width: 100%;
+    height: var(--default-layout-header-height, 60px);
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px;
+}
+.inner {
+    height: 100%;
+    width: var(--default-layout-width);
+    padding: 0px 24px 0px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+}
+.search {
+    position: relative;
+    width: 500px;
+    height: var(--search-height);
+    background-color: #1618230f;
+    border-radius: var(--search-border-radius);
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    overflow: hidden;
+    margin: 0px;
+    display: flex;
+
+    input {
+        flex: 1;
+        font-weight: 400;
+        line-height: 21px;
+        caret-color: var(--primary); //màu mà con trỏ nhấp nháy khi nhập
+        font-size: 1.6rem;
+        background: transparent;
+        color: var(--black);
+        height: 100%;
+    }
+    //dấu ~ là chọn phần tử cùng cấp (phần tử anh chị em)
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: calc((var(--search-height)-var(--search-height-after)) / 2);
+        right: 52px;
+        height: var(--search-height-after);
+        width: 1px;
+        background-color: #d6d7d9;
+    }
+    &:hover {
+        border: 1.5px solid rgba(22, 24, 35, 0.2);
+        .search-btn {
+            background: rgba(22, 24, 35, 0.06);
+            cursor: pointer;
+        }
+    }
+    // focus within là áp dụng cho thằng cha khi có thằng con được focus
+    &:focus-within {
+        border: 1.5px solid rgba(22, 24, 35, 0.2);
+    }
+}
+.clear,
+.loading {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(22, 24, 35, 0.35);
+    font-size: 1.6rem;
+}
+.search-btn {
+    width: 52px;
+    height: 100%;
+    border-top-right-radius: var(--search-border-radius);
+    border-bottom-right-radius: var(--search-border-radius);
+    font-size: 1.8rem;
+    color: rgba(22, 24, 35, 0.34);
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+        cursor: pointer;
+    }
+    &:active {
+        background-color: rgba(22, 24, 35, 0.6);
+    }
+}
