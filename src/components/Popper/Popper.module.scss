@@ -1,5 +1,4 @@
 .wrapper {
-    padding: 9px 16px;
     max-height: min(-156px + 100vh, 734px);
     min-height: 100px;
     width: 100%;
@@ -7,4 +6,7 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
     border-radius: 8px;
     overflow: hidden auto;
+}
+.menu-popper {
+    padding: 10px 0;
 }
