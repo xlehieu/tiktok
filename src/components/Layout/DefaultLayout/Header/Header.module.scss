@@ -107,10 +107,27 @@
 }
 .actions {
     display: flex;
+    background-color: transparent;
 }
 .more-btn {
     font-size: 2rem;
     margin-left: 16px;
     background-color: transparent;
     padding: 8px;
+    cursor: pointer;
+}
+.action-btn {
+    font-size: 2.2rem;
+    color: #161823;
+    background-color: transparent;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+.user-avatar {
+    background-color: transparent;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-left: 12px;
+    cursor: pointer;
 }

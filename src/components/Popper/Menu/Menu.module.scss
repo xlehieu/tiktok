@@ -9,7 +9,7 @@
 .menu-item {
     width: 100%;
     justify-content: flex-end;
-    height: 46px;
+    height: 42px;
     border-radius: 0;
     padding-left: 16px;
     font-weight: 500;
@@ -17,4 +17,29 @@
     &:hover {
         background-color: rgba(22, 24, 35, 0.03);
     }
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+}
+//Header menu
+.header-menu {
+    position: relative;
+    height: 50px;
+    margin-top: -8px;
+}
+
+.back-btn {
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 16px;
+    transform: translate((-50%, -50%));
+    font-weight: 400;
 }
