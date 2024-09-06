@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
     faCloudUpload,
     faCoins,
-    faUser,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
     faKeyboard,
-    faMagnifyingGlass,
     faMessage,
     faQuestionCircle,
-    faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
-import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/image';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
-import AcountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import { UserIcon } from '~/components/Icon';
+import ImageDefault from '~/components/Image';
+import Search from './Search';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -59,16 +54,10 @@ const MENU_ITEMS = [
 const currentUser = true;
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    });
-
+    // eslint-disable-next-line no-sparse-arrays
     const userMenu = [
         {
-            icon: <FontAwesomeIcon icon={faUser} />,
+            icon: <UserIcon />,
             title: 'View profile',
             to: '/@pamiuoi',
         },
@@ -97,34 +86,7 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="logo Tiktok" />
                 </div>
-                <HeadlessTippy
-                    visible={searchResult.length > 0}
-                    interactive
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('title-search')}>Accounts</h4>
-                                <AcountItem />
-                                <AcountItem />
-                                <AcountItem />
-                                <AcountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Tìm kiếm" spellCheck={false} />
-                        <button>
-                            <FontAwesomeIcon className={cx('clear')} icon={faCircleXmark} />
-                            <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-                        </button>
-                        {/* loading */}
-
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                <Search />
 
                 <div className={cx('actions')}>
                     {currentUser ? (
@@ -151,10 +113,11 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS}>
                         {currentUser ? (
-                            <img
+                            <ImageDefault
                                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/9b36db8582910ffa56d496ea8992694c~c5_100x100.jpeg?lk3s=30310797&nonce=73009&refresh_token=fb1dd138539584325ace1ab4160692db&x-expires=1725512400&x-signature=Trclgd5yNgLeksiwR1s0%2FMvli1A%3D&shp=30310797&shcp=-"
                                 alt=""
                                 className={cx('user-avatar')}
+                                fallback="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-1/343454215_1551963102211548_5526078545643112773_n.jpg?stp=cp0_dst-jpg_s40x40&_nc_cat=105&ccb=1-7&_nc_sid=6738e8&_nc_ohc=UwT9kqWMJb8Q7kNvgHdyLPc&_nc_ht=scontent.fhan14-1.fna&oh=00_AYCNvugrXxjWCqN0WLAFkLaxCV5dLQ7UopNwDHXLNT2H9g&oe=66DF26B3"
                             />
                         ) : (
                             <button className={cx('more-btn')}>

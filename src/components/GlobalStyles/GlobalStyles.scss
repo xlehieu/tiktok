@@ -15,11 +15,18 @@
     padding: 0;
     margin: 0;
 }
+
+// Fonts embeded
+@font-face {
+    font-family: TikTokFont;
+    src: url('/assets/font/TikTokFont-Regular.woff2');
+}
+
 html {
     font-size: 62.5%;
 }
 body {
-    font-family: 'Signika', sans-serif;
+    font-family: 'TikTokFont', 'Signika', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
@@ -31,6 +38,7 @@ input,
     outline: none;
     border: none;
 }
+// thẻ a có thuộc tính href
 a[href] {
     text-decoration: none;
 }

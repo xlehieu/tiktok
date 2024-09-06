@@ -2,6 +2,9 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    + .wrapper {
+        margin-top: 8px;
+    }
 }
 
 .avatar {
