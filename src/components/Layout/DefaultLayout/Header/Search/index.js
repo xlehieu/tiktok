@@ -12,6 +12,7 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
     const inputRef = useRef();
 
     const handleClear = () => {
@@ -22,11 +23,33 @@ function Search() {
     const handleHideResult = () => {
         setShowResult(false);
     };
+    // hàm xử lý không cho phép người dùng gõ space đầu tiên
+    const handleOnChange = (text) => {
+        setSearchValue(text.trim());
+    };
+    //fetch trả về một promise trả về dữ liệu và ta lấy dữ liệu đó chuyển về dạng json
+    // và cái thằng ở trên lại trả về một promise
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2]);
-        }, 0);
-    }, []);
+        if (!searchValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        setLoading(true);
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            .then(function (res) {
+                return res.json();
+                // hàm json() biến đổi object Respone của fetch trả về
+                // thành dạng JSON, đại khái là sau một quá trình phức tạp gì đó từ obj res
+                // thành được JSON và từ JSON lại trả về một Promise chứa object dữ liệu
+            })
+            .then((res) => {
+                setSearchResult(res.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    }, [searchValue]);
     return (
         <HeadlessTippy
             interactive
@@ -35,10 +58,9 @@ function Search() {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={cx('title-search')}>Accounts</h4>
-                        <AcountItem />
-                        <AcountItem />
-                        <AcountItem />
-                        <AcountItem />
+                        {searchResult.map((result) => (
+                            <AcountItem key={result.id} data={result} />
+                        ))}
                     </PopperWrapper>
                 </div>
             )}
@@ -50,16 +72,16 @@ function Search() {
                     placeholder="Tìm kiếm"
                     value={searchValue}
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={(e) => handleOnChange(e.target.value)}
                     onFocus={() => setShowResult(true)}
                 />
                 {/* toán tử !! dùng để biến đổi một biến thành bool ví dụ searchValue ='' thì là false */}
-                {!!searchValue && (
+                {!loading && !!searchValue && (
                     <button className={cx('clear')} onClick={handleClear}>
                         <FontAwesomeIcon icon={faCircleXmark} />
-                        {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
                     </button>
                 )}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
                 {/* loading */}
                 <button className={cx('search-btn')}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />

@@ -41,6 +41,7 @@ input,
 // thẻ a có thuộc tính href
 a[href] {
     text-decoration: none;
+    color: var(--text-color);
 }
 //custom tippy tooltip
 

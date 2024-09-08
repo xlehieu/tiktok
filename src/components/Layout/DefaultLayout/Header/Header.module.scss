@@ -81,6 +81,19 @@
     color: rgba(22, 24, 35, 0.35);
     font-size: 1.6rem;
 }
+
+.loading {
+    animation: spinner 1s linear infinite;
+}
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
 .clear {
     cursor: pointer;
 }
